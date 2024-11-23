@@ -17,4 +17,4 @@ Soldem el sòcul per posar l'arduino a la protoboard.
 Aprenem com funciona un LED i soldem un LED amb la seva resistència a la protoboard, per poder-lo activar des de D13.
 Fem un programa que engega i apaga el LED que hem soldat.
 Aprenem què és una funció i fem una funció que engega el LED i una altra que l'apaga.
-![alt text](image.png)
+![alt text](Imatges/image.png)
