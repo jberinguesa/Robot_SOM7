@@ -4,25 +4,29 @@
 // Ari i Jana: Crear les funcions engega_LED i apaga_LED
 // Crear la funció setup_LED()
 // Ficar comentari Gestió LEDs
+// Ensenyar #define COLOR_VERD 0,0,255 i que a parti d'aquí facin una rutina 
 // CMD+SHIFT+P: Publish to Github
-//
+// Estudiar el driver del motor
+// Soldar-lo
+// Fer les funcions per inicialitzar i fer anar el motor
 
 //------------------------------------- Gestió LEDs -----------------------------------------
 #define OUTPUT_LED 13
 #define COLOR_VERD 0,0,255
 #define COLOR_GROC 0,255,255
 
-//Funció que engega el LED
-//intensitat: Valor entre 0 i 255, on 0 és màxim i 255 el mínim
+// Funció que engega el LED
+// intensitat: Valor entre 0 i 255, on 0 és màxim i 255 el mínim
 void engega_LED(int intensitat){
   analogWrite(OUTPUT_LED, intensitat);
 }
 
-//Funció que apaga el LED
+// Funció que apaga el LED
 void apaga_LED(){
   digitalWrite(OUTPUT_LED, HIGH);
 }
 
+// Funció que configura la sortida pel LED
 void setup_LED(){
   pinMode(OUTPUT_LED, OUTPUT);
 }
@@ -56,7 +60,8 @@ void loop() {
   engega_LED(250);
   delay(1000);
   engega_LED_color(COLOR_GROC);
-  
+  apaga_LED();
+  delay(1000);
   
 }
 
