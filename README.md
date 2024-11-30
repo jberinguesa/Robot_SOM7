@@ -18,3 +18,7 @@ Aprenem com funciona un LED i soldem un LED amb la seva resistència a la protob
 Fem un programa que engega i apaga el LED que hem soldat.
 Aprenem què és una funció i fem una funció que engega el LED i una altra que l'apaga.
 ![alt text](Imatges/image.png)
+
+## 30/11/24 Funció LED colors
+Practiquem amb funcions i creem una funció per configurar el LED de color i una altra per posar el LED de color al color que volem. També creem colors propis amb #define que definim un color.
+Hem vist el que era un repositori de codi i ens hem creat un compte a Github.
