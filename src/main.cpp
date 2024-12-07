@@ -1,19 +1,18 @@
 #include <Arduino.h>
 
 //Feina per fer:
-// Ari i Jana: Crear les funcions engega_LED i apaga_LED
-// Crear la funció setup_LED()
-// Ficar comentari Gestió LEDs
-// Ensenyar #define COLOR_VERD 0,0,255 i que a parti d'aquí facin una rutina 
-// CMD+SHIFT+P: Publish to Github
+// Hem d'acabar de pujar el codi a Github. Falta que s'autentifiquin.
 // Estudiar el driver del motor
 // Soldar-lo
 // Fer les funcions per inicialitzar i fer anar el motor
+// Fer les funcions de motor endavant i enrere
+// Modificar que el motor arranqui suau, aprendre fer un for
+// Arrancar més ràpid o més lent
 
 //------------------------------------- Gestió LEDs -----------------------------------------
 #define OUTPUT_LED 13
-#define COLOR_VERD 0,0,255
-#define COLOR_GROC 0,255,255
+#define COLOR_ROSA 0,0,255
+#define COLOR_VERMELL 0,255,255
 
 // Funció que engega el LED
 // intensitat: Valor entre 0 i 255, on 0 és màxim i 255 el mínim
@@ -48,19 +47,59 @@ void setup_LED_color(){
   pinMode(LED_BLUE, OUTPUT);
 }
 
+//------------------------------------- Gestió Motor -----------------------------------------
+#define pinPWMA 18
+#define pinAIN2 19
+#define pinAIN1 20
+#define pinBIN1 22
+#define pinBIN2 23
+#define pinPWMB 24
+
+// Funció que engega el motor
+// speed: Velocitat del motor (0-255)
+void motorForwardL(int speed)
+{
+  digitalWrite(pinAIN1, HIGH);
+  digitalWrite(pinAIN2, LOW);
+  analogWrite(pinPWMA, speed);
+}
+
+// Funció que para el motor
+void motorStopL()
+{
+  digitalWrite(pinAIN1, LOW);
+  digitalWrite(pinAIN2, LOW);
+  analogWrite(pinPWMA, 0);
+  //digitalWrite(pinBIN1, LOW);
+  //digitalWrite(pinBIN2, LOW);
+  //analogWrite(pinPWMB, 0);
+}
+
+// Funció per configurar el motor
+void setup_motor(){
+  pinMode(pinAIN2, OUTPUT);
+  pinMode(pinAIN1, OUTPUT);
+  pinMode(pinPWMA, OUTPUT);
+  pinMode(pinBIN1, OUTPUT);
+  pinMode(pinBIN2, OUTPUT);
+  pinMode(pinPWMB, OUTPUT);
+}
+
 void setup() {
   Serial.begin(115200);
   setup_LED();
-
+  setup_motor();
 }
 
 void loop() {
   Serial.println("Hello World");
-  engega_LED_color(COLOR_VERD);
+  engega_LED_color(COLOR_VERMELL);
   engega_LED(250);
+  motorForwardL(50);
   delay(1000);
-  engega_LED_color(COLOR_GROC);
+  engega_LED_color(COLOR_ROSA);
   apaga_LED();
+  motorStopL();
   delay(1000);
   
 }
