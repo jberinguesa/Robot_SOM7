@@ -22,3 +22,7 @@ Aprenem què és una funció i fem una funció que engega el LED i una altra que
 ## 30/11/24 Funció LED colors
 Practiquem amb funcions i creem una funció per configurar el LED de color i una altra per posar el LED de color al color que volem. També creem colors propis amb #define que definim un color.
 Hem vist el que era un repositori de codi i ens hem creat un compte a Github.
+
+## 07/12/24 Introducció motors
+Hem acabat de posar en marxa el Github i hem fet algunes pràctiques de fer commits i veure els canvis fets.
+Hem vist els diferents motors que hi ha i les seves aplicacions. Hem vist què passa quan posem més o menys tensió a un motor DC i quan li canviem la polaritat.
