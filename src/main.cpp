@@ -22,7 +22,7 @@ void engega_LED(int intensitat){
 
 // Funció que apaga el LED
 void apaga_LED(){
-  digitalWrite(OUTPUT_LED, HIGH);
+  analogWrite(OUTPUT_LED, 255);
 }
 
 // Funció que configura la sortida pel LED
