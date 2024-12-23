@@ -55,7 +55,7 @@ void setup_LED_color(){
 
 // Funció que engega el motor
 // speed: Velocitat del motor (0-255)
-void motorForwardL(int speed)
+void motorEndavantE(int speed)
 {
   digitalWrite(pinSTBY, HIGH);
   digitalWrite(pinAIN1, HIGH);
@@ -64,7 +64,7 @@ void motorForwardL(int speed)
 }
 
 // Funció que para el motor
-void motorStopL()
+void motorStopE()
 {
   digitalWrite(pinAIN1, LOW);
   digitalWrite(pinAIN2, LOW);
@@ -95,11 +95,11 @@ void loop() {
   Serial.println("Hello World");
   engega_LED_color(COLOR_VERMELL);
   engega_LED(250);
-  motorForwardL(50);
+  motorEndavantE(50);
   delay(1000);
   engega_LED_color(COLOR_ROSA);
   apaga_LED();
-  motorStopL();
+  motorStopE();
   delay(1000);
   
 }
