@@ -103,16 +103,11 @@ void setup() {
 
 void loop() {
   Serial.println("Hello World");
-  engega_LED_color(COLOR_VERMELL);
-  engega_LED(250);
-  motorEndavantE(50);
-  delay(1000);
-  motorEnreraE(100);
-  delay(1000);
-  engega_LED_color(COLOR_ROSA);
-  apaga_LED();
-  motorStopE();
-  delay(1000);
+  int contador = 0;
+  for(int i = 0; i < 255; i++){
+    Serial.println(i);
+    delay(500);
+  }
   
 }
 
