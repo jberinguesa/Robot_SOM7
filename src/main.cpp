@@ -63,6 +63,16 @@ void motorEndavantE(int speed)
   analogWrite(pinPWMA, speed);
 }
 
+// Funció que engega el motor enrera
+// speed: Velocitat del motor (0-255)
+void motorEnreraE(int speed)
+{
+  digitalWrite(pinSTBY, HIGH);
+  digitalWrite(pinAIN1, LOW);
+  digitalWrite(pinAIN2, HIGH);
+  analogWrite(pinPWMA, speed);
+}
+
 // Funció que para el motor
 void motorStopE()
 {
@@ -96,6 +106,8 @@ void loop() {
   engega_LED_color(COLOR_VERMELL);
   engega_LED(250);
   motorEndavantE(50);
+  delay(1000);
+  motorEnreraE(100);
   delay(1000);
   engega_LED_color(COLOR_ROSA);
   apaga_LED();
