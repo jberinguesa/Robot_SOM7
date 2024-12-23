@@ -1,9 +1,6 @@
 #include <Arduino.h>
 
 //Feina per fer:
-// Hem d'acabar de pujar el codi a Github. Falta que s'autentifiquin.
-// Estudiar el driver del motor
-// Soldar-lo
 // Fer les funcions per inicialitzar i fer anar el motor
 // Fer les funcions de motor endavant i enrere
 // Modificar que el motor arranqui suau, aprendre fer un for
@@ -51,6 +48,7 @@ void setup_LED_color(){
 #define pinPWMA 18
 #define pinAIN2 19
 #define pinAIN1 20
+#define pinSTBY 21
 #define pinBIN1 22
 #define pinBIN2 23
 #define pinPWMB 24
@@ -59,6 +57,7 @@ void setup_LED_color(){
 // speed: Velocitat del motor (0-255)
 void motorForwardL(int speed)
 {
+  digitalWrite(pinSTBY, HIGH);
   digitalWrite(pinAIN1, HIGH);
   digitalWrite(pinAIN2, LOW);
   analogWrite(pinPWMA, speed);
@@ -83,6 +82,7 @@ void setup_motor(){
   pinMode(pinBIN1, OUTPUT);
   pinMode(pinBIN2, OUTPUT);
   pinMode(pinPWMB, OUTPUT);
+  pinMode(pinSTBY, OUTPUT);
 }
 
 void setup() {
