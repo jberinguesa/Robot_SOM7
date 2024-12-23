@@ -25,4 +25,13 @@ Hem vist el que era un repositori de codi i ens hem creat un compte a Github.
 
 ## 07/12/24 Introducció motors
 Hem acabat de posar en marxa el Github i hem fet algunes pràctiques de fer commits i veure els canvis fets.
-Hem vist els diferents motors que hi ha i les seves aplicacions. Hem vist què passa quan posem més o menys tensió a un motor DC i quan li canviem la polaritat.
+Hem vist els diferents motors que hi ha i les seves aplicacions. Hem vist què passa quan posem més o menys tensió a un motor DC i quan li canviem la polaritat. Hem començat a muntar el controlador
+
+## 21/12/24 Muntatge controlador motor
+Hem cablejat el motor i hem après a fer servir un tester per mirar continuïtat i comprovar si tot ho havíem soldat bé.
+<img width="259" alt="image" src="https://github.com/user-attachments/assets/aab83cb1-7f6c-4937-88dd-f23c81d47c70" />
+<img width="693" alt="image" src="https://github.com/user-attachments/assets/49d4003f-355f-4b66-9cbb-88bb9a1702c8" />
+<img width="421" alt="image" src="https://github.com/user-attachments/assets/f0f161b0-248d-47e1-9cd1-67e36ab8baa1" />
+
+
+
