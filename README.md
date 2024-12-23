@@ -17,7 +17,9 @@ Soldem el sòcul per posar l'arduino a la protoboard.
 Aprenem com funciona un LED i soldem un LED amb la seva resistència a la protoboard, per poder-lo activar des de D13.
 Fem un programa que engega i apaga el LED que hem soldat.
 Aprenem què és una funció i fem una funció que engega el LED i una altra que l'apaga.
-![alt text](Imatges/image.png)
+<p align="center">
+  <img width="250" alt="image" src="Imatges/241116_PlacaTop.png" />
+</p>
 
 ## 30/11/24 Funció LED colors
 Practiquem amb funcions i creem una funció per configurar el LED de color i una altra per posar el LED de color al color que volem. També creem colors propis amb #define que definim un color.
@@ -29,9 +31,11 @@ Hem vist els diferents motors que hi ha i les seves aplicacions. Hem vist què p
 
 ## 21/12/24 Muntatge controlador motor
 Hem cablejat el motor i hem après a fer servir un tester per mirar continuïtat i comprovar si tot ho havíem soldat bé.
-<img width="259" alt="image" src="https://github.com/user-attachments/assets/aab83cb1-7f6c-4937-88dd-f23c81d47c70" />
-<img width="693" alt="image" src="https://github.com/user-attachments/assets/49d4003f-355f-4b66-9cbb-88bb9a1702c8" />
-<img width="421" alt="image" src="https://github.com/user-attachments/assets/f0f161b0-248d-47e1-9cd1-67e36ab8baa1" />
+De moment el motor el tenim connectat al VBUS, l'alimentació del USB.
+
+<img width="250" alt="image" src="Imatges/241223_Esquema.png" />
+<img width="250" alt="image" src="Imatges/241223_PlacaTop.png" />
+<img width="250" alt="image" src="Imatges/241223_PlacaMotorBot.png" />
 
 
 
