@@ -3,6 +3,7 @@
 //Feina per fer:
 // Fer les funcions per inicialitzar i fer anar el motor
 // Fer les funcions de motor endavant i enrere
+// Aprendre a fer un for, fer un for al loop que envii un número per serial
 // Modificar que el motor arranqui suau, aprendre fer un for
 // Arrancar més ràpid o més lent
 
@@ -84,6 +85,15 @@ void motorStopE()
   //analogWrite(pinPWMB, 0);
 }
 
+// Funcio que arranca suaument el motor cap endavant
+// speed: Velocitat del motor (0-255)
+void motorArrancaSuauEndavantE(int speed){
+  for(int i = 0; i < speed; i += 3){
+    motorEndavantE(i);
+    delay(10);
+  }
+}
+
 // Funció per configurar el motor
 void setup_motor(){
   pinMode(pinAIN2, OUTPUT);
@@ -103,11 +113,10 @@ void setup() {
 
 void loop() {
   Serial.println("Hello World");
-  int contador = 0;
-  for(int i = 0; i < 255; i++){
-    Serial.println(i);
-    delay(500);
-  }
+  motorArrancaSuauEndavantE(255);
+  delay(2000);
+  motorStopE();
+  delay(1000);
   
 }
 
