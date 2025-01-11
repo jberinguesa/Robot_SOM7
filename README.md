@@ -37,7 +37,7 @@ De moment el motor el tenim connectat al VBUS, l'alimentació del USB.
 <img width="250" alt="image" src="Imatges/241223_PlacaTop.png" />
 <img width="250" alt="image" src="Imatges/241223_PlacaMotorBot.png" />
 
-## 11/01/25 Funcions engega
+## 11/01/25 Funcions bàsiques de control de motor
 Hem configurat les sortides per controlar el motor, hem creat una funció per configurar el motor(setup_motor) i unes funcions per fer anar el motor 1 en un sentit (motorEndavantE) i en un altre (motorEnreraE). De moment el motors només volten a màxima velocitat. També hem fet una funció per parar el motor (motorStopE).
 
 A loop hem fet que el motor giri cap a un sentit durant 1s, es pari i giri cap a l'altre sentit durant 1s.
