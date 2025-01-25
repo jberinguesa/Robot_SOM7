@@ -42,5 +42,8 @@ Hem configurat les sortides per controlar el motor, hem creat una funció per co
 
 A loop hem fet que el motor giri cap a un sentit durant 1s, es pari i giri cap a l'altre sentit durant 1s.
 
+## 25/01/25
+Avui hem treballat poc hem instal·lat el Copilot, l'hem après a fer funcionar i hem fet que la funció motorrEndavantE(int speed) li poguem passar un paràmetre amb la velocitat.
+
 
 

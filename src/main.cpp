@@ -1,8 +1,6 @@
 #include <Arduino.h>
 
 //Feina per fer:
-// Fer les funcions per inicialitzar i fer anar el motor
-// Fer les funcions de motor endavant i enrere
 // Aprendre a fer un for, fer un for al loop que envii un número per serial
 // Modificar que el motor arranqui suau, aprendre fer un for
 // Arrancar més ràpid o més lent
@@ -54,44 +52,71 @@ void setup_LED_color(){
 #define pinBIN2 23
 #define pinPWMB 24
 
-// Funció que engega el motor
-// speed: Velocitat del motor (0-255)
-void motorEndavantE(int speed)
+// Funció que engega endavant els 2 motors
+// speedE: Velocitat del motor esquerre(0-255)
+// speedD: Velocitat del motor dret (0-255)
+void motorEndavant(int speedE, int speedD)
 {
   digitalWrite(pinSTBY, HIGH);
   digitalWrite(pinAIN1, HIGH);
   digitalWrite(pinAIN2, LOW);
-  analogWrite(pinPWMA, speed);
+  analogWrite(pinPWMA, speedE);
+  digitalWrite(pinBIN1, HIGH);
+  digitalWrite(pinBIN2, LOW);
+  analogWrite(pinPWMB, speedD);
+
+  //Enviar per serial que el motor va endavant i la velociat de cada motor
+  Serial.print("Motor endavant: ");
+  Serial.print(speedE);
+  Serial.print(" ");
+  Serial.println(speedD);
 }
 
-// Funció que engega el motor enrera
-// speed: Velocitat del motor (0-255)
-void motorEnreraE(int speed)
+// Funció que engega enrera els 2 motors
+// speedE: Velocitat del motor esquerre (0-255)
+// speedD: Velocitat del motor dret (0-255)
+void motorEnrera(int speedE, int speedD)
 {
   digitalWrite(pinSTBY, HIGH);
   digitalWrite(pinAIN1, LOW);
   digitalWrite(pinAIN2, HIGH);
-  analogWrite(pinPWMA, speed);
+  analogWrite(pinPWMA, speedE);
+  digitalWrite(pinBIN1, LOW);
+  digitalWrite(pinBIN2, HIGH);
+  analogWrite(pinPWMB, speedD);
+
+  //Enviar per serial que el motor va enrera i la velociat de cada motor
+  Serial.print("Motor enrera: ");
+  Serial.print(speedE);
+  Serial.print(" ");
+  Serial.println(speedD);
 }
 
-// Funció que para el motor
-void motorStopE()
+// Funció que para els motors
+void motorStop()
 {
   digitalWrite(pinAIN1, LOW);
   digitalWrite(pinAIN2, LOW);
   analogWrite(pinPWMA, 0);
-  //digitalWrite(pinBIN1, LOW);
-  //digitalWrite(pinBIN2, LOW);
-  //analogWrite(pinPWMB, 0);
+  digitalWrite(pinBIN1, LOW);
+  digitalWrite(pinBIN2, LOW);
+  analogWrite(pinPWMB, 0);
+
+  //Enviar per serial que el motor està parat
+  Serial.println("Motor parat");
 }
 
-// Funcio que arranca suaument el motor cap endavant
-// speed: Velocitat del motor (0-255)
-void motorArrancaSuauEndavantE(int speed){
+// Funcio que arranca suaument els motor cap endavant
+// speed: Velocitat dels 2 motors (0-255)
+void motorArrancaSuauEndavant(int speed){
   for(int i = 0; i < speed; i += 3){
-    motorEndavantE(i);
+    motorEndavant(i, i);
     delay(10);
   }
+
+  //Enviar per serial que el motor arranca suau endavant i la velocitat
+  Serial.print("Motors arranca suau endavant: ");
+  Serial.println(speed);
 }
 
 // Funció per configurar el motor
@@ -113,9 +138,13 @@ void setup() {
 
 void loop() {
   Serial.println("Hello World");
-  motorArrancaSuauEndavantE(255);
+  motorArrancaSuauEndavant(255);
   delay(2000);
-  motorStopE();
+  motorEndavant(200, 100);
+  delay(2000);
+  motorEndavant(100, 200);
+  delay(2000);
+  motorStop();
   delay(1000);
   
 }
