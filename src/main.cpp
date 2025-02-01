@@ -1,9 +1,8 @@
 #include <Arduino.h>
 
 //Feina per fer:
-// Aprendre a fer un for, fer un for al loop que envii un número per serial
 // Modificar que el motor arranqui suau, aprendre fer un for
-// Arrancar més ràpid o més lent
+// Fer anar els dos motors
 
 //------------------------------------- Gestió LEDs -----------------------------------------
 #define OUTPUT_LED 13
@@ -138,14 +137,35 @@ void setup() {
 
 void loop() {
   Serial.println("Hello World");
-  motorArrancaSuauEndavant(255);
-  delay(2000);
-  motorEndavant(200, 100);
-  delay(2000);
-  motorEndavant(100, 200);
-  delay(2000);
-  motorStop();
-  delay(1000);
-  
+  //Fes un bucle que enviï pel canal serie un missatge que digui "El número X" on X és un número de 1 a 10 que incrementa en cada iteració
+  for(int i = 0; i < 10; i++){
+    Serial.print("El número ");
+    Serial.println(i);
+    delay(1000);
+  }
+  //Prova la funció /explain del copilot
+  //Fes un bucle que enviï pel canal serie un missatge que digui "El número X" on X és un número de 1 a 10 que decrementa en cada iteració
+  for(int i = 10; i > 0; i--){
+    Serial.print("El número ");
+    Serial.println(i);
+    delay(1000);
+  }
+  //Fes un bucle que enviï pel canal serie un missatge que digui "El número X" on X és un número de 1 a 10 que incrementa en cada iteració, però saltant els números de 2 en 2
+  for(int i = 0; i < 10; i += 2){
+    Serial.print("El número ");
+    Serial.println(i);
+    delay(1000);
+  }
+  //Fes un bucle que enviï pel canal serie les taules de multiplicar, enviant "X per Y igual a Z" on X i Y són els números de 1 a 10 i Z és el resultat de multiplicar-los
+  for(int i = 0; i < 10; i++){
+    for(int j = 0; j < 10; j++){
+      Serial.print(i);
+      Serial.print(" per ");
+      Serial.print(j);
+      Serial.print(" igual a ");
+      Serial.println(i*j);
+    }
+  }
+
 }
 
