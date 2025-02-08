@@ -80,7 +80,30 @@ void loop() {
       Serial.println(i*j);
     }
   }
+```
+
+## 08/02/24
+Hem creat les funcions per engegar el motor suaument i hem conegut la instrucció de compilador #if per que es compili codi segons el valor de la constant DEBUG.
+```cpp
+#define DEBUG TRUE
+
+// Funcio que arranca suaument els motor cap enrera 
+// speed: Velocitat dels 2 motors (0-255)
+// acceleracio: Valor de l'acceleració (0-255)
+void motorArrancaSuauEnrera(int speed, int acceleracio){
+  //Engegar el motor enrera incrementant la velociatat segons el valor d'acceleració, utilitzant la funcio motorEnrera
+  for(int i = 0; i <= speed; i+=acceleracio){
+    motorEnrera(i, i);
+    delay(10);
+  }
+
+  #if DEBUG
+  //Enviar per serial que el motor arranca suau enrera i la velocitat
+    Serial.print("Motors arranca suau enrera: ");
+    Serial.println(speed);
+  #endif
 }
+```
 
 
 

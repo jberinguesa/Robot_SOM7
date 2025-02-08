@@ -4,6 +4,8 @@
 // Modificar que el motor arranqui suau, aprendre fer un for
 // Fer anar els dos motors
 
+#define DEBUG false
+
 //------------------------------------- Gestió LEDs -----------------------------------------
 #define OUTPUT_LED 13
 #define COLOR_ROSA 0,0,255
@@ -64,11 +66,13 @@ void motorEndavant(int speedE, int speedD)
   digitalWrite(pinBIN2, LOW);
   analogWrite(pinPWMB, speedD);
 
-  //Enviar per serial que el motor va endavant i la velociat de cada motor
-  Serial.print("Motor endavant: ");
-  Serial.print(speedE);
-  Serial.print(" ");
-  Serial.println(speedD);
+  #if DEBUG
+    //Enviar per serial que el motor va endavant i la velociat de cada motor
+    Serial.print("Motor endavant: ");
+    Serial.print(speedE);
+    Serial.print(" ");
+    Serial.println(speedD);
+  #endif
 }
 
 // Funció que engega enrera els 2 motors
@@ -84,11 +88,13 @@ void motorEnrera(int speedE, int speedD)
   digitalWrite(pinBIN2, HIGH);
   analogWrite(pinPWMB, speedD);
 
-  //Enviar per serial que el motor va enrera i la velociat de cada motor
-  Serial.print("Motor enrera: ");
-  Serial.print(speedE);
-  Serial.print(" ");
-  Serial.println(speedD);
+  #if DEBUG
+    //Enviar per serial que el motor va enrera i la velociat de cada motor
+    Serial.print("Motor enrera: ");
+    Serial.print(speedE);
+    Serial.print(" ");
+    Serial.println(speedD);
+    #endif
 }
 
 // Funció que para els motors
@@ -101,21 +107,44 @@ void motorStop()
   digitalWrite(pinBIN2, LOW);
   analogWrite(pinPWMB, 0);
 
-  //Enviar per serial que el motor està parat
-  Serial.println("Motor parat");
+  #if DEBUG
+    //Enviar per serial que el motor està parat
+    Serial.println("Motor parat");
+  #endif
 }
 
 // Funcio que arranca suaument els motor cap endavant
 // speed: Velocitat dels 2 motors (0-255)
-void motorArrancaSuauEndavant(int speed){
-  for(int i = 0; i < speed; i += 3){
+// acceleracio: Valor de l'acceleració (0-255)
+void motorArrancaSuauEndavant(int speed, int acceleracio){
+  //Engegar el motor endavant incrementant la velociatat segons el valor d'acceleració, utilitzant la funcio motorEndavant
+  for(int i = 0; i <= speed; i+=acceleracio){
     motorEndavant(i, i);
     delay(10);
   }
 
-  //Enviar per serial que el motor arranca suau endavant i la velocitat
-  Serial.print("Motors arranca suau endavant: ");
-  Serial.println(speed);
+  #if DEBUG
+    //Enviar per serial que el motor arranca suau endavant i la velocitat
+    Serial.print("Motors arranca suau endavant: ");
+    Serial.println(speed);
+  #endif
+}
+
+// Funcio que arranca suaument els motor cap enrera 
+// speed: Velocitat dels 2 motors (0-255)
+// acceleracio: Valor de l'acceleració (0-255)
+void motorArrancaSuauEnrera(int speed, int acceleracio){
+  //Engegar el motor enrera incrementant la velociatat segons el valor d'acceleració, utilitzant la funcio motorEnrera
+  for(int i = 0; i <= speed; i+=acceleracio){
+    motorEnrera(i, i);
+    delay(10);
+  }
+
+  #if DEBUG
+  //Enviar per serial que el motor arranca suau enrera i la velocitat
+    Serial.print("Motors arranca suau enrera: ");
+    Serial.println(speed);
+  #endif
 }
 
 // Funció per configurar el motor
@@ -136,36 +165,19 @@ void setup() {
 }
 
 void loop() {
-  Serial.println("Hello World");
-  //Fes un bucle que enviï pel canal serie un missatge que digui "El número X" on X és un número de 1 a 10 que incrementa en cada iteració
-  for(int i = 0; i < 10; i++){
-    Serial.print("El número ");
-    Serial.println(i);
-    delay(1000);
-  }
-  //Prova la funció /explain del copilot
-  //Fes un bucle que enviï pel canal serie un missatge que digui "El número X" on X és un número de 1 a 10 que decrementa en cada iteració
-  for(int i = 10; i > 0; i--){
-    Serial.print("El número ");
-    Serial.println(i);
-    delay(1000);
-  }
-  //Fes un bucle que enviï pel canal serie un missatge que digui "El número X" on X és un número de 1 a 10 que incrementa en cada iteració, però saltant els números de 2 en 2
-  for(int i = 0; i < 10; i += 2){
-    Serial.print("El número ");
-    Serial.println(i);
-    delay(1000);
-  }
-  //Fes un bucle que enviï pel canal serie les taules de multiplicar, enviant "X per Y igual a Z" on X i Y són els números de 1 a 10 i Z és el resultat de multiplicar-los
-  for(int i = 0; i < 10; i++){
-    for(int j = 0; j < 10; j++){
-      Serial.print(i);
-      Serial.print(" per ");
-      Serial.print(j);
-      Serial.print(" igual a ");
-      Serial.println(i*j);
-    }
-  }
+  //Engegar el motor endavant
+  motorArrancaSuauEndavant(255, 10);
+  delay(1000);
+  //Parar el motor
+  motorStop();
+  delay(1000);
+  //Engegar el motor enrera
+  motorArrancaSuauEnrera(255, 10);
+  delay(1000);
+  //Parar el motor
+  motorStop();
+  delay(1000);
+  Serial.println("Fi del programa");
 
 }
 
