@@ -45,5 +45,42 @@ A loop hem fet que el motor giri cap a un sentit durant 1s, es pari i giri cap a
 ## 25/01/25
 Avui hem treballat poc hem instal·lat el Copilot, l'hem après a fer funcionar i hem fet que la funció motorrEndavantE(int speed) li poguem passar un paràmetre amb la velocitat.
 
+## 01/02/24
+Pràctiques amb el Copilot. Hem après què són els bucles for i hem fet algunes pràctiques.
+
+```cpp
+void loop() {
+  Serial.println("Hello World");
+  //Fes un bucle que enviï pel canal serie un missatge que digui "El número X" on X és un número de 1 a 10 que incrementa en cada iteració
+  for(int i = 0; i < 10; i++){
+    Serial.print("El número ");
+    Serial.println(i);
+    delay(1000);
+  }
+  //Prova la funció /explain del copilot
+  //Fes un bucle que enviï pel canal serie un missatge que digui "El número X" on X és un número de 1 a 10 que decrementa en cada iteració
+  for(int i = 10; i > 0; i--){
+    Serial.print("El número ");
+    Serial.println(i);
+    delay(1000);
+  }
+  //Fes un bucle que enviï pel canal serie un missatge que digui "El número X" on X és un número de 1 a 10 que incrementa en cada iteració, però saltant els números de 2 en 2
+  for(int i = 0; i < 10; i += 2){
+    Serial.print("El número ");
+    Serial.println(i);
+    delay(1000);
+  }
+  //Fes un bucle que enviï pel canal serie les taules de multiplicar, enviant "X per Y igual a Z" on X i Y són els números de 1 a 10 i Z és el resultat de multiplicar-los
+  for(int i = 0; i < 10; i++){
+    for(int j = 0; j < 10; j++){
+      Serial.print(i);
+      Serial.print(" per ");
+      Serial.print(j);
+      Serial.print(" igual a ");
+      Serial.println(i*j);
+    }
+  }
+}
+
 
 
