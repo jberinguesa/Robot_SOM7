@@ -1,10 +1,11 @@
 #include <Arduino.h>
 
 //Feina per fer:
-// Modificar que el motor arranqui suau, aprendre fer un for
 // Fer anar els dos motors
+// Posar en marxa les bateries
 
-#define DEBUG false
+#define DEBUG_MOTOR false
+#define DEBUG_SENSOR_IR true
 
 //------------------------------------- Gestió LEDs -----------------------------------------
 #define OUTPUT_LED 13
@@ -66,7 +67,7 @@ void motorEndavant(int speedE, int speedD)
   digitalWrite(pinBIN2, LOW);
   analogWrite(pinPWMB, speedD);
 
-  #if DEBUG
+  #if DEBUG_MOTOR
     //Enviar per serial que el motor va endavant i la velociat de cada motor
     Serial.print("Motor endavant: ");
     Serial.print(speedE);
@@ -88,7 +89,7 @@ void motorEnrera(int speedE, int speedD)
   digitalWrite(pinBIN2, HIGH);
   analogWrite(pinPWMB, speedD);
 
-  #if DEBUG
+  #if DEBUG_MOTOR
     //Enviar per serial que el motor va enrera i la velociat de cada motor
     Serial.print("Motor enrera: ");
     Serial.print(speedE);
@@ -107,7 +108,7 @@ void motorStop()
   digitalWrite(pinBIN2, LOW);
   analogWrite(pinPWMB, 0);
 
-  #if DEBUG
+  #if DEBUG_MOTOR
     //Enviar per serial que el motor està parat
     Serial.println("Motor parat");
   #endif
@@ -123,7 +124,7 @@ void motorArrancaSuauEndavant(int speed, int acceleracio){
     delay(10);
   }
 
-  #if DEBUG
+  #if DEBUG_MOTOR
     //Enviar per serial que el motor arranca suau endavant i la velocitat
     Serial.print("Motors arranca suau endavant: ");
     Serial.println(speed);
@@ -140,7 +141,7 @@ void motorArrancaSuauEnrera(int speed, int acceleracio){
     delay(10);
   }
 
-  #if DEBUG
+  #if DEBUG_MOTOR
   //Enviar per serial que el motor arranca suau enrera i la velocitat
     Serial.print("Motors arranca suau enrera: ");
     Serial.println(speed);
@@ -158,26 +159,52 @@ void setup_motor(){
   pinMode(pinSTBY, OUTPUT);
 }
 
+//------------------------------------- Gestió Sensor IR -----------------------------------------
+#define pinODD 12
+#define pinLED1 11
+#define pinLED3 10
+#define pinLED5 9
+#define pinLED7 8
+
+// Funció que configura els pins dels sensors IR
+void setup_sensorIR(){
+  pinMode(pinODD, OUTPUT);
+  pinMode(pinLED1, INPUT);
+  pinMode(pinLED3, INPUT);
+  pinMode(pinLED5, INPUT);
+  pinMode(pinLED7, INPUT);
+}
+
+// Funció que llegir el valor d'una entrada del sensor IR
+// pin: Pin del sensor IR
+int LlegirSensorIR(int pin){
+  return digitalRead(pin);
+}
+
+// Funció que llegir el valor dels 4 sensors IR
+int LlegirSensorsIR(){
+  int valor = 0;
+  valor = LlegirSensorIR(pinLED1) + 2*LlegirSensorIR(pinLED3) + 4*LlegirSensorIR(pinLED5) + 8*LlegirSensorIR(pinLED7);
+  
+  #if DEBUG_SENSOR_IR
+    //Enviar per serial el valor dels 4 sensors IR
+    Serial.print("Valor sensors IR: ");
+    Serial.println(valor);
+  #endif
+
+  return valor;
+}
+
+
 void setup() {
   Serial.begin(115200);
   setup_LED();
   setup_motor();
+  setup_sensorIR();
 }
 
 void loop() {
-  //Engegar el motor endavant
-  motorArrancaSuauEndavant(255, 10);
-  delay(1000);
-  //Parar el motor
   motorStop();
-  delay(1000);
-  //Engegar el motor enrera
-  motorArrancaSuauEnrera(255, 10);
-  delay(1000);
-  //Parar el motor
-  motorStop();
-  delay(1000);
-  Serial.println("Fi del programa");
-
+  LlegirSensorsIR();
 }
 
