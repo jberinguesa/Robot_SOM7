@@ -105,5 +105,32 @@ void motorArrancaSuauEnrera(int speed, int acceleracio){
 }
 ```
 
+## 15/02/25
+Hem modificat les funcions de moure motor i parar per que actuin sobre els dos motors.
+```cpp
+// Funció que engega endavant els 2 motors
+// speedE: Velocitat del motor esquerre(0-255)
+// speedD: Velocitat del motor dret (0-255)
+void motorEndavant(int speedE, int speedD)
+{
+  digitalWrite(pinSTBY, HIGH);
+  digitalWrite(pinAIN1, HIGH);
+  digitalWrite(pinAIN2, LOW);
+  analogWrite(pinPWMA, speedE);
+  digitalWrite(pinBIN1, HIGH);
+  digitalWrite(pinBIN2, LOW);
+  analogWrite(pinPWMB, speedD);
+
+  #if DEBUG
+    //Enviar per serial que el motor va endavant i la velociat de cada motor
+    Serial.print("Motor endavant: ");
+    Serial.print(speedE);
+    Serial.print(" ");
+    Serial.println(speedD);
+  #endif
+}
+```
+
+
 
 
