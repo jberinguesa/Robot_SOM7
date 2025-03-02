@@ -42,10 +42,10 @@ Hem configurat les sortides per controlar el motor, hem creat una funció per co
 
 A loop hem fet que el motor giri cap a un sentit durant 1s, es pari i giri cap a l'altre sentit durant 1s.
 
-## 25/01/25
+## 25/01/25 Copilot
 Avui hem treballat poc hem instal·lat el Copilot, l'hem après a fer funcionar i hem fet que la funció motorrEndavantE(int speed) li poguem passar un paràmetre amb la velocitat.
 
-## 01/02/24
+## 01/02/24 Bucles for
 Pràctiques amb el Copilot. Hem après què són els bucles for i hem fet algunes pràctiques.
 
 ```cpp
@@ -82,7 +82,7 @@ void loop() {
   }
 ```
 
-## 08/02/24
+## 08/02/24 Arranc suau de motor
 Hem creat les funcions per engegar el motor suaument i hem conegut la instrucció de compilador #if per que es compili codi segons el valor de la constant DEBUG.
 ```cpp
 #define DEBUG TRUE
@@ -105,7 +105,7 @@ void motorArrancaSuauEnrera(int speed, int acceleracio){
 }
 ```
 
-## 15/02/25
+## 15/02/25 Funcionament dos motors
 Hem modificat les funcions de moure motor i parar per que actuin sobre els dos motors.
 ```cpp
 // Funció que engega endavant els 2 motors
@@ -131,10 +131,10 @@ void motorEndavant(int speedE, int speedD)
 }
 ```
 
-## 22/02/25
+## 22/02/25 Connector pila
 Avui hem fet poca cosa. Hem fet un connector per poder connectar el mòdul de les piles a la placa.
 
-## 01/03/25
+## 01/03/25 PCB nova
 Ara volem incorporar el sensosr d'infrarrojos, però hem vist que necessitem utilitzar les entrades analògiques i les tenim ocupades pel control de motor. Això vol dir que hem de tornar a refer el prototípus que teníem. Com que ja hem après a fer prototipus, avui ens hem dedicat a veure com es fa una PCB amb el programa [EasyEDA](https://easyeda.com/). No els hi he fet fer, jo l'he dibuixat i elles han vist com es feia. Hem encarregat la fabricació de les plaques.
 
 I ara tenim aquest esquema:
