@@ -131,6 +131,16 @@ void motorEndavant(int speedE, int speedD)
 }
 ```
 
+## 22/02/25
+Avui hem fet poca cosa. Hem fet un connector per poder connectar el mòdul de les piles a la placa.
 
+## 01/03/25
+Ara volem incorporar el sensosr d'infrarrojos, però hem vist que necessitem utilitzar les entrades analògiques i les tenim ocupades pel control de motor. Això vol dir que hem de tornar a refer el prototípus que teníem. Com que ja hem après a fer prototipus, avui ens hem dedicat a veure com es fa una PCB amb el programa [EasyEDA](https://easyeda.com/). No els hi he fet fer, jo l'he dibuixat i elles han vist com es feia.
+
+I ara tenim aquest esquema:
+<img width="250" alt="image" src="Imatges/250301_Esquema.png" />
+
+I aquesta placa:
+<img width="250" alt="image" src="Imatges/250301_PCB.png" />
 
 
