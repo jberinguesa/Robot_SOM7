@@ -4,8 +4,8 @@
 // Fer anar els dos motors
 // Posar en marxa les bateries
 
-#define DEBUG_MOTOR false
-#define DEBUG_SENSOR_IR true
+#define DEBUG_MOTOR true
+#define DEBUG_SENSOR_IR false
 
 //------------------------------------- Gestió LEDs -----------------------------------------
 #define OUTPUT_LED 13
@@ -46,13 +46,13 @@ void setup_LED_color(){
 }
 
 //------------------------------------- Gestió Motor -----------------------------------------
-#define pinPWMA 18
-#define pinAIN2 19
-#define pinAIN1 20
-#define pinSTBY 21
-#define pinBIN1 22
-#define pinBIN2 23
-#define pinPWMB 24
+#define pinPWMA 2
+#define pinAIN2 3
+#define pinAIN1 4
+#define pinSTBY 5
+#define pinBIN1 6
+#define pinBIN2 7
+#define pinPWMB 8
 
 // Funció que engega endavant els 2 motors
 // speedE: Velocitat del motor esquerre(0-255)
@@ -178,13 +178,13 @@ void setup_sensorIR(){
 // Funció que llegir el valor d'una entrada del sensor IR
 // pin: Pin del sensor IR
 int LlegirSensorIR(int pin){
-  return digitalRead(pin);
+  return analogRead(pin);
 }
 
 // Funció que llegir el valor dels 4 sensors IR
 int LlegirSensorsIR(){
   int valor = 0;
-  valor = LlegirSensorIR(pinLED1) + 2*LlegirSensorIR(pinLED3) + 4*LlegirSensorIR(pinLED5) + 8*LlegirSensorIR(pinLED7);
+  valor = LlegirSensorIR(pinLED1) + LlegirSensorIR(pinLED3) + LlegirSensorIR(pinLED5) + LlegirSensorIR(pinLED7);
   
   #if DEBUG_SENSOR_IR
     //Enviar per serial el valor dels 4 sensors IR
@@ -205,6 +205,14 @@ void setup() {
 
 void loop() {
   motorStop();
-  LlegirSensorsIR();
+  //Serial.println(analogRead(A0));
+  motorArrancaSuauEndavant(255, 10);
+  delay(1000);
+  motorStop();
+  delay(1000);
+  motorArrancaSuauEnrera(255, 10);
+  delay(1000);
+  motorStop();
+  
 }
 
