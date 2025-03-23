@@ -4,8 +4,9 @@
 // Fer anar els dos motors
 // Posar en marxa les bateries
 
-#define DEBUG_MOTOR true
-#define DEBUG_SENSOR_IR false
+#define DEBUG_MOTOR false
+#define DEBUG_SENSOR_IR true
+#define LIMIT_SENSOR_IR 300
 
 //------------------------------------- Gestió LEDs -----------------------------------------
 #define OUTPUT_LED 13
@@ -159,16 +160,14 @@ void setup_motor(){
   pinMode(pinSTBY, OUTPUT);
 }
 
-//------------------------------------- Gestió Sensor IR -----------------------------------------
-#define pinODD 12
-#define pinLED1 11
-#define pinLED3 10
-#define pinLED5 9
-#define pinLED7 8
+//------------------------------------ Gestió Sensor IR -----------------------------------------
+#define pinLED1 A0
+#define pinLED3 A1
+#define pinLED5 A2
+#define pinLED7 A3
 
 // Funció que configura els pins dels sensors IR
 void setup_sensorIR(){
-  pinMode(pinODD, OUTPUT);
   pinMode(pinLED1, INPUT);
   pinMode(pinLED3, INPUT);
   pinMode(pinLED5, INPUT);
@@ -182,17 +181,23 @@ int LlegirSensorIR(int pin){
 }
 
 // Funció que llegir el valor dels 4 sensors IR
-int LlegirSensorsIR(){
-  int valor = 0;
-  valor = LlegirSensorIR(pinLED1) + LlegirSensorIR(pinLED3) + LlegirSensorIR(pinLED5) + LlegirSensorIR(pinLED7);
-  
-  #if DEBUG_SENSOR_IR
-    //Enviar per serial el valor dels 4 sensors IR
-    Serial.print("Valor sensors IR: ");
-    Serial.println(valor);
-  #endif
+void LlegirSensorsIRArray(int sensors[4]) {
+  sensors[0] = LlegirSensorIR(pinLED1);
+  sensors[1] = LlegirSensorIR(pinLED3);
+  sensors[2] = LlegirSensorIR(pinLED5);
+  sensors[3] = LlegirSensorIR(pinLED7);
 
-  return valor;
+  #if DEBUG_SENSOR_IR
+    // Enviar per serial els valors dels 4 sensors IR
+    Serial.print("Valors sensors IR: ");
+    Serial.print(sensors[0]);
+    Serial.print(", ");
+    Serial.print(sensors[1]);
+    Serial.print(", ");
+    Serial.print(sensors[2]);
+    Serial.print(", ");
+    Serial.println(sensors[3]);
+  #endif
 }
 
 
@@ -204,15 +209,24 @@ void setup() {
 }
 
 void loop() {
-  motorStop();
-  //Serial.println(analogRead(A0));
-  motorArrancaSuauEndavant(255, 10);
+  int Sensors[4] = {0, 0, 0, 0};
+  LlegirSensorsIRArray(Sensors);
+  if (Sensors[0] < LIMIT_SENSOR_IR ){
+    motorEndavant(125, 0);
+    Serial.println("Endavant");
+  }
+  else if (Sensors[1] < LIMIT_SENSOR_IR){
+    motorEnrera(125, 0);
+  }
+  else if (Sensors[2] < LIMIT_SENSOR_IR){
+    motorEndavant(0, 125);
+  }
+  else if (Sensors[3] < LIMIT_SENSOR_IR){
+    motorEnrera(0, 125);
+  }
+  else{
+    motorStop();
+  }
   delay(1000);
-  motorStop();
-  delay(1000);
-  motorArrancaSuauEnrera(255, 10);
-  delay(1000);
-  motorStop();
-  
 }
 
