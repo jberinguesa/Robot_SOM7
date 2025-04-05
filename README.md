@@ -145,4 +145,84 @@ I aquesta placa:
 
 <img width="250" alt="image" src="Imatges/250301_PCB.png" />
 
+## 15/04/25 Soldar placa
+Hem soldat la nova placa amb els components.
+
+## 05/04/25 Lectura sensor IR
+Hem fet el programa per poder llegir els sensors IR. Hem fet un programa que segons el sesnosr que actives fas moure un motor o altre.
+
+```cpp
+//------------------------------------ Gestió Sensor IR -----------------------------------------
+#define pinLED1 A0
+#define pinLED3 A1
+#define pinLED5 A2
+#define pinLED7 A3
+#define LIMIT_SENSOR_IR 300
+
+// Funció que configura els pins dels sensors IR
+void setup_sensorIR(){
+  pinMode(pinLED1, INPUT);
+  pinMode(pinLED3, INPUT);
+  pinMode(pinLED5, INPUT);
+  pinMode(pinLED7, INPUT);
+}
+
+// Funció que llegir el valor d'una entrada del sensor IR
+// pin: Pin del sensor IR
+int LlegirSensorIR(int pin){
+  return analogRead(pin);
+}
+
+// Funció que llegir el valor dels 4 sensors IR
+void LlegirSensorsIRArray(int sensors[4]) {
+  sensors[0] = LlegirSensorIR(pinLED1);
+  sensors[1] = LlegirSensorIR(pinLED3);
+  sensors[2] = LlegirSensorIR(pinLED5);
+  sensors[3] = LlegirSensorIR(pinLED7);
+
+  #if DEBUG_SENSOR_IR
+    // Enviar per serial els valors dels 4 sensors IR
+    Serial.print("Valors sensors IR: ");
+    Serial.print(sensors[0]);
+    Serial.print(", ");
+    Serial.print(sensors[1]);
+    Serial.print(", ");
+    Serial.print(sensors[2]);
+    Serial.print(", ");
+    Serial.println(sensors[3]);
+  #endif
+}
+
+
+void setup() {
+  Serial.begin(9600);
+  setup_LED();
+  setup_motor();
+  setup_sensorIR();
+}
+
+void loop() {
+  
+  int Sensors[4] = {0, 0, 0, 0};
+  
+  if (Sensors[0] < LIMIT_SENSOR_IR ){
+    motorEndavant(125, 0);
+    Serial.println("Endavant");
+  }
+  else if (Sensors[1] < LIMIT_SENSOR_IR){
+    motorEnrera(125, 0);
+  }
+  else if (Sensors[2] < LIMIT_SENSOR_IR){
+    motorEndavant(0, 125);
+  }
+  else if (Sensors[3] < LIMIT_SENSOR_IR){
+    motorEnrera(0, 125);
+  }
+  else{
+    motorStop();
+  }
+  delay(1000);
+  
+}
+````
 

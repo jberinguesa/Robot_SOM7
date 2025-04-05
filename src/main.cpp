@@ -5,8 +5,7 @@
 // Posar en marxa les bateries
 
 #define DEBUG_MOTOR false
-#define DEBUG_SENSOR_IR true
-#define LIMIT_SENSOR_IR 300
+#define DEBUG_SENSOR_IR false
 
 //------------------------------------- Gestió LEDs -----------------------------------------
 #define OUTPUT_LED 13
@@ -165,6 +164,7 @@ void setup_motor(){
 #define pinLED3 A1
 #define pinLED5 A2
 #define pinLED7 A3
+#define LIMIT_SENSOR_IR 300
 
 // Funció que configura els pins dels sensors IR
 void setup_sensorIR(){
@@ -202,15 +202,24 @@ void LlegirSensorsIRArray(int sensors[4]) {
 
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   setup_LED();
   setup_motor();
   setup_sensorIR();
 }
 
 void loop() {
+  
   int Sensors[4] = {0, 0, 0, 0};
-  LlegirSensorsIRArray(Sensors);
+  
+  // LlegirSensorsIRArray(Sensors);
+  // if (Sensors[0] < LIMIT_SENSOR_IR){
+  //   Serial.println("0");
+  // } else {
+  //   Serial.println("1");
+  // }
+  // delay(1000);
+
   if (Sensors[0] < LIMIT_SENSOR_IR ){
     motorEndavant(125, 0);
     Serial.println("Endavant");
@@ -228,5 +237,6 @@ void loop() {
     motorStop();
   }
   delay(1000);
+  
 }
 
