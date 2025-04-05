@@ -151,6 +151,8 @@ Hem soldat la nova placa amb els components.
 ## 05/04/25 Lectura sensor IR
 Hem fet el programa per poder llegir els sensors IR. Hem fet un programa que segons el sesnosr que actives fas moure un motor o altre.
 
+<img width="350" alt="image" src="Imatges/250405_PlacaAmbIR.jpg" />
+
 ```cpp
 //------------------------------------ Gestió Sensor IR -----------------------------------------
 #define pinLED1 A0
