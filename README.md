@@ -228,3 +228,8 @@ void loop() {
 }
 ````
 
+## 26/04/25 Mecanitzar plàstics
+La intencio era que elles dibuixessin la carcassa de plàstic, però ens hauria portat massa temps, per tant l'he dibuixat jo, l'he imprès i avui hem mecanitzat els forats i hem anat muntant la placa a dins.
+
+<img width="350" alt="image" src="Imatges/250426_Plastics.jpg" />
+<img width="350" alt="image" src="Imatges/250426_Muntatge.jpg" />
